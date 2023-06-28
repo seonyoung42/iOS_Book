@@ -80,6 +80,76 @@ iOS 관련 주제들을 공부하는 repo 입니다
   
 </details>
 
+<details> 
+  <summary> 앱이 foreground와 background에 있을 때 어떤 제약사항이 있는지 설명하시오 </summary>
+
+  <img width="355" alt="스크린샷 2023-06-28 오후 9 59 26" src="https://github.com/seonyoung42/iOS_Book/assets/77603632/782b12d6-c456-49a6-8572-cef8c78b08e3">
+
+  ```
+  Foreground mode
+  : 메모리 및 기타 시스템 리소스에 높은 우선순위를 가지며 시스템은 이러한 리소스를 사용할 수 있도록 필요에 따라 background 앱을 종료한다.
+
+  Background mode
+  : 가능한 적은 메모리공간을 사용해야하기 때문에 사용자 이벤트를 받기 어렵고 공유 시스템 리소스를 해제하고 이미지 객체 참조 등 메모리를 제한한다.
+
+  - Unattached : 앱이 실행되지 않은 상태
+  - Foreground : APP이 실행되어 보여지고 있는 상태
+    - Active : 앱이 실행중이며 현재 이벤트를 받고 있는 상태
+    - Inactive : 앱이 실행중이지만 아무런 이벤트를 받지 않은 상태 (Foreground 상태에서 전화가 오거나, 잠금상태, 런치 스크린에서 InActive 상태가 된다.)
+  - Background : APP이 보여지고 있지는 않지만 여전히 실행되고 있는 코드가 있는 상태
+  - Suspened : 실행되는 코드가 없는 상태
+  
+  ```
+  
+</details>
+
+<details> 
+  <summary> 상태 변화에 따라 다른 동작을 처리하기 위한 sceneDelegate 메서드들을 설명하시오. </summary>
+
+  ```swift
+
+  func sceneDidDisconnect(_ scene: UIScene) {
+        // Background로 들어간 직후나 세션이 삭제되었을 때 호출
+  }
+    
+  func sceneDidBecomeActive(_ scene: UIScene) {
+        // In-Active -> Active 로 변경될 때 호출
+  }
+
+  func sceneWillResignActive(_ scene: UIScene) {
+        // Active -> In-Active 로 변경될 때 호출
+  }
+
+  func sceneWillEnterForeground(_ scene: UIScene) {
+        // Background -> Foreground 로 변경될 때 호출
+  }
+
+  func sceneDidEnterBackground(_ scene: UIScene) {
+        // Foreground -> Background 로 변경될 때 호출
+  }
+  ```
+  
+</details>
+
+<details> 
+  <summary> 앱이 In-Active 상태가 되는 시나리오를 설명하시오. </summary>
+
+  ```
+  
+  ```
+  
+</details>
+
+<details> 
+  <summary>  </summary>
+
+  ```
+  
+  ```
+  
+</details>
+
+
 ## Swift
 <details> 
   <summary> struct와 class와 enum의 차이를 설명하시오. </summary>
