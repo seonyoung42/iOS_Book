@@ -83,21 +83,12 @@ iOS 관련 주제들을 공부하는 repo 입니다
 <details> 
   <summary> 앱이 foreground와 background에 있을 때 어떤 제약사항이 있는지 설명하시오 </summary>
 
-  <img width="355" alt="스크린샷 2023-06-28 오후 9 59 26" src="https://github.com/seonyoung42/iOS_Book/assets/77603632/782b12d6-c456-49a6-8572-cef8c78b08e3">
-
   ```
   Foreground mode
-  : 메모리 및 기타 시스템 리소스에 높은 우선순위를 가지며 시스템은 이러한 리소스를 사용할 수 있도록 필요에 따라 background 앱을 종료한다.
+  : 메모리 및 기타 시스템 리소스에 높은 우선순위를 가지며 OS는 이러한 리소스를 사용할 수 있도록 필요에 따라 background 앱을 종료한다.
 
   Background mode
-  : 가능한 적은 메모리공간을 사용해야하기 때문에 사용자 이벤트를 받기 어렵고 공유 시스템 리소스를 해제하고 이미지 객체 참조 등 메모리를 제한한다.
-
-  - Unattached : 앱이 실행되지 않은 상태
-  - Foreground : APP이 실행되어 보여지고 있는 상태
-    - Active : 앱이 실행중이며 현재 이벤트를 받고 있는 상태
-    - Inactive : 앱이 실행중이지만 아무런 이벤트를 받지 않은 상태 (Foreground 상태에서 전화가 오거나, 잠금상태, 런치 스크린에서 InActive 상태가 된다.)
-  - Background : APP이 보여지고 있지는 않지만 여전히 실행되고 있는 코드가 있는 상태
-  - Suspened : 실행되는 코드가 없는 상태
+  : 가능한 적은 메모리공간을 사용해야한다는 제약사항이 이 사용자 이벤트를 받기 어렵고 이미지 객체 참조 등에 대한 메모리도 제한된다.
   
   ```
   
@@ -132,23 +123,69 @@ iOS 관련 주제들을 공부하는 repo 입니다
 </details>
 
 <details> 
-  <summary> 앱이 In-Active 상태가 되는 시나리오를 설명하시오. </summary>
+  <summary> App의 Unattached, Inactive, Active, Background, Suspended에 대해 설명하시오. </summary>
+
+  <img width="355" alt="스크린샷 2023-06-28 오후 9 59 26" src="https://github.com/seonyoung42/iOS_Book/assets/77603632/782b12d6-c456-49a6-8572-cef8c78b08e3">
 
   ```
-  
+  Unattached : 앱이 실행되지 않은 상태
+  Foreground : APP이 실행되어 보여지고 있는 상태
+    - Active : 앱이 실행중이며 현재 이벤트를 받고 있는 상태
+    - Inactive : 앱이 실행중이지만 아무런 이벤트를 받지 않은 상태 (Foreground 상태에서 전화가 오거나, 잠금상태, 런치 스크린에서 InActive 상태가 된다.)
+  Background : APP이 보여지고 있지는 않지만 여전히 실행되고 있는 코드가 있는 상태
+  Suspened : 실행되는 코드가 없는 상태
   ```
   
+</details>
+
+<details> 
+  <summary> 앱이 In-Active 상태가 되는 경우를 설명하시오. </summary>
+
+  ```
+  1. 전화나 메세지 같은 인터럽트가 발생하는 경우
+  2. 알림창이 화면을 덮어 앱이 이벤트를 받을 수 없는 경우
+  3. 앱이 Background -> Foreground가 될 때 In-Active를 거쳐 Active가 됨
+  4. 앱이 Unattached -> Foreground가 될 때 In-Active를 거쳐 Active가 됨
+  ```
+  
+</details>
+
+<details> 
+  <summary> GCD API 동작 방식과 필요성에 대해 설명하시오. </summary>
+
+  ```
+  GCD : 애플이 동시성 프로그래밍을 지원하기 위해 만든 기술로 프로그래머가 실행할 작업을 Dispatch Queue에 추가하면 GCD가 작업에 맞는 스레드를 자동으로 생성해서 실행하고 스레드를 제거한다.
+
+  - DispatchQueue는 2개의 타입( Serial / Concurrent )으로 구분되며 둘 모두 FIFO 순서로 처리
+  - 앱을 실행하면 시스템이 자동으로 메인스레드 위에서 동작하는 Main 큐(Serial Queue)를 만들어서 작업을 수행하고, 그 외에 추가적으로 여러 개의 Global 큐(Cuncurrent Queue)를 만들어서 큐 관리
+  - 각 작업은 동기(sync) 방식과 비동기(async) 방식으로 실행 가능하지만 Main 큐에서는 async 만 사용 가능
+
+  1) Main Queue : 메인스레드에서 작동하는 큐 (UI, 사용자 인터렉션 관련 처리)
+
+    DispatchQueue.main.async {
+    // Task
+    }
+
+  2) Global Queue : 우선순위(Qos = Quality of Servie) 지정하여 작동하는 큐
+
+    DispatchQueue.global(qos : .background).async {
+    // Task
+    }
+
+  GCD의 필요성 : GCD를 사용하면 스레드 생성, 유지, 삭제 등을 개발자가 신경쓸 필요 없이 작업(코드)을 큐에 예약하기만 하면 되기 때문에 스레드 관리가 용이해지고 성능이 증가한다.
+  ```
 </details>
 
 <details> 
   <summary>  </summary>
 
   ```
-  
+
   ```
   
 </details>
-
+  
+</details>
 
 ## Swift
 <details> 
