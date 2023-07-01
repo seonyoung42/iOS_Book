@@ -177,7 +177,89 @@ iOS 관련 주제들을 공부하는 repo 입니다
 </details>
 
 <details> 
-  <summary>  </summary>
+  <summary> Auto Layout의 장단점은? </summary>
+
+  ```
+
+  ```
+  
+</details>
+
+<details> 
+  <summary> MVC 패턴이란 </summary>
+
+  ```
+
+  ```
+  
+</details>
+
+
+<details> 
+  <summary> KVC와 KVO란? </summary>
+
+  ```
+
+  ```
+  
+</details>
+
+<details> 
+  <summary> Swift의 특징은? </summary>
+
+  ```
+
+  ```
+  
+</details>
+
+<details> 
+  <summary> Higher Order Function이란?  </summary>
+
+  ```
+
+  ```
+  
+</details>
+
+<details> 
+  <summary> Method Swizzling이란? </summary>
+
+  ```
+
+  ```
+  
+</details>
+
+<details> 
+  <summary> HTTP/2의 특징은? </summary>
+
+  ```
+
+  ```
+  
+</details>
+
+<details> 
+  <summary> Memory Leak의 대처방법은? </summary>
+
+  ```
+
+  ```
+  
+</details>
+
+<details> 
+  <summary> 이미지 리스트의 성능 향상법은? </summary>
+
+  ```
+
+  ```
+  
+</details>
+
+<details> 
+  <summary> </summary>
 
   ```
 
@@ -448,4 +530,7 @@ SOLID
   ```
   
 </details>
+
+## 
+
 
