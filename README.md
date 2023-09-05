@@ -246,6 +246,34 @@ iOS 관련 주제들을 공부하는 repo 입니다
 </details>
 
 <details> 
+  <summary> Async / Await </summary>
+
+  ```
+  Async Await 란 비동기를 처리하는 기능으로, completion Handler의 단점을 해결해준다.
+  completion Handler를 사용하며 발생하는 코드의 depth와 클로져를 없애며 비동기 코드를 동기처럼 작성할 수 있게 도와준다.
+
+  // 예제
+  print("A")
+  Task {
+    let returnStr: String = try await asyncMethod()
+  }
+  print("B")
+
+  func asyncMethod() async throws -> String {
+    try await Task.sleep(nanoseconds: 3_000_000_000) //3초
+    return "Sleep End"
+  }
+
+  // 출력 결과
+  // "A"
+  // "B"
+  // ~ 3초 후 ~
+  // "Sleep End"
+  ```
+  
+</details>
+
+<details> 
   <summary> Auto Layout의 장단점은? </summary>
 
   ```
@@ -253,16 +281,6 @@ iOS 관련 주제들을 공부하는 repo 입니다
   ```
   
 </details>
-
-<details> 
-  <summary> MVC 패턴이란 </summary>
-
-  ```
-
-  ```
-  
-</details>
-
 
 <details> 
   <summary> KVC와 KVO란? </summary>
@@ -699,6 +717,66 @@ SOLID
   
 </details>
 
-## 
+## iOS의 디자인 패턴
+
+<details> 
+  <summary> MVC 패턴 </summary>
+
+  ```
+  Model(모델), View(뷰), Controller(컨트롤러) 로 구성된 패턴
+
+  - Model : 데이터 및 비즈니스 로직 관리
+  - View : 사용자에게 보여지는 UI
+  - Controller : 사용자의 입력을 받고 처리
+
+  Controller로 사용자의 입력이 들어오면 Model을 통해 데이터를 업데이트 하거나 불러오고, 해당 데이터를 보여줄 View를 선택해서 화면에 보여준다.
+
+  그러나, 실제 iOS에서는 Controller의 역할을 ViewController가 당당하고, View가 ViewController 내에 있기 때문에
+  View와 Controller가 강하게 연결되어 있고 View Controller가 거의 모든 일을 하게 된다.
+  따라서 실제로는 Model만 따로 만들어지게 된다.
+  ```
+  
+</details>
+
+<details> 
+  <summary> MVP 패턴 </summary>
+
+  ```
+  Model, View, Presenter 로 구성된 패턴
+
+  - Model : 데이터 및 비즈니스 로직 관리
+  - View : 사용자에게 보여지는 UI
+  - Presenter : View에서 요청한 정보를 Model로부터 가공해서 View로 전달
+
+  View로 사용자의 입력이 들어오면 Presenter에 작업을 요청하고, Presenter는 필요한 데이터를 Model에 요청한다.
+  이후 Model로부터 업데이트 된 데이터를 전달받아 View를 갱신한다.
+
+  MVP에서는 View와 ViewController 모두 View 계층에 해당한다.
+
+  ```
+  
+</details>
+
+
+<details> 
+  <summary> MVVM 패턴 </summary>
+
+  ```
+  Model, View, ViewModel 로 구성된 패턴
+
+  - Model : 데이터 및 비즈니스 로직 관리
+  - View : 사용자에게 보여지는 UI
+  - ViewModel : View를 위한 Model로 View와 Binding을 하여 연결 후 View의 액션을 받고 View를 업데이트 함
+
+  View로 사용자의 입력이 들어오면 ViewModel에 명령을 하고, ViewModel은 필요한 데이터를 Model에 요청한다.
+  이후 응답받은 데이터를 가공해서 저장하고, View는 ViewModel과의 Data Binding으로 인해 자동으로 갱신된다.
+
+  ```
+  
+</details>
+
+
+
+
 
 
