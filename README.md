@@ -123,7 +123,7 @@ iOS 관련 주제들을 공부하는 repo 입니다
 </details>
 
 <details> 
-  <summary> App의 Unattached, Inactive, Active, Background, Suspended에 대해 설명하시오. </summary>
+  <summary> App의 생명주기 </summary>
 
   <img width="355" alt="스크린샷 2023-06-28 오후 9 59 26" src="https://github.com/seonyoung42/iOS_Book/assets/77603632/782b12d6-c456-49a6-8572-cef8c78b08e3">
 
@@ -146,6 +146,75 @@ iOS 관련 주제들을 공부하는 repo 입니다
   2. 알림창이 화면을 덮어 앱이 이벤트를 받을 수 없는 경우
   3. 앱이 Background -> Foreground가 될 때 In-Active를 거쳐 Active가 됨
   4. 앱이 Unattached -> Foreground가 될 때 In-Active를 거쳐 Active가 됨
+  ```
+  
+</details>
+
+<details> 
+  <summary> ViewController의 생명주기 </summary>
+
+  ```
+  1. loadView : 컨트롤러가 관리하는 뷰를 생성한다. 뷰컨트롤러가 생성되고 순차적으로 완성되었을때 호출된다.
+
+  2. viewDidLoad : 컨트롤러의 뷰가 메모리에 올라간 뒤에 호출된다. 뷰가 생성될때만 호출된다.
+
+  3. viewWillAppear : 화면에 뷰가 표시될때마다 호출된다.
+
+  4. viewWillLayoutSubviews : 뷰컨트롤러에게 그 자식뷰의 레이아웃을 조정하는 것에 대한 것을 알려주기위해 호출된다. frame이 바뀔때마다 호출된다.
+
+  5. viewDidLayoutSubviews : 뷰가 그 자식 뷰의 레이아웃에 영향을 준 것을 뷰컨트롤러에게 알려주기 위해 호출된다. 뷰가 그 자식 View의 레이아웃을 바꾸고난 뒤에 추가적인 변경을 하고 싶을때 사용
+
+  6. viewDidAppear : 뷰가 나타났다는 것을 컨트롤러에게 알리는 역할을 한다. 뷰가 화면에 나타난 직후에 호출된다.
+
+  7. viewWillDisappear : 뷰가 사라지기 직전에 호출된다. 뷰가 삭제 되려고하고있는 것을 ViewController에게 알린다.
+
+  8. viewDidDisappear : 뷰가 사라진 후 호출된다. ViewController에게 View가 제거되었음을 알린다. 
+ 
+  ```
+  
+</details>
+
+<details> 
+  <summary> Higher Order Function이란?  </summary>
+
+  ```
+  HOF(= 고차함수) 란 함수를 다루는 함수로 함수를 인자로 전달받거나, 함수 실행의 결과로 함수를 리턴하는 함수이다.
+
+  Swift에서 HOF에는 Map, filter, Reduce 등 이 있다.
+
+  1. Map : 기존 데이터를 변형하여 새로운 컨테이너 생성
+  doubledNumbers = numbers.map { $0 * 2 }
+
+  2. Filter : 컨테이너 내부의 값을 거른 새로운 컨테이너 생성
+  filteredNumbers = numbers.filter { $0 % 2 == 0 }
+
+  3. Reduce : 컨테이너 내부의 데이터들을 하나로 통합
+  sumOfNumbers = numbers.reduce(0) { $0 + $1 }
+
+  ```
+  
+</details>
+
+<details> 
+  <summary> 동기와 비동기 </summary>
+
+  ```
+  1. 동기 : 주어진 명령을 차례대로 처리하되 하나의 업무가 완료될 때 까지는 다른 업무로 넘어가지 않는 방식
+  2. 비동기 : 주어진 명령을 차례대로 처리하되 시간이 걸리는 업무는 진행 해둔 채 기다리는 동안 다른 업무를 처리하는 방식
+  ```
+  
+</details>
+
+<details> 
+  <summary> 동시성 프로그래밍 과 병렬성 프로그래밍 </summary>
+
+  ```
+  1. 동시성 프로그래밍 : 시간을 분할하여 스레드들에게 서로 번갈아가며 제공하여 실행되게끔 하는 방식으로 동시에 여러 프로그램을 돌리는 것처럼
+  보이는 하는 프로그래밍
+  => 동시성 프로그래밍을 구현하기 위해서 비동기 프로그래밍을 활용
+  => Apple 에서는 동시성 프로그래밍을 지원하기 위해 GCD 제공
+
+  2. 병렬성 프로그래밍 : 멀티 코어에서 멀티 스레드를 동작시키는 방식으로 실제로 동시에 여러 프로그램을 돌리는 프로그래밍
   ```
   
 </details>
@@ -197,15 +266,6 @@ iOS 관련 주제들을 공부하는 repo 입니다
 
 <details> 
   <summary> KVC와 KVO란? </summary>
-
-  ```
-
-  ```
-  
-</details>
-
-<details> 
-  <summary> Higher Order Function이란?  </summary>
 
   ```
 
@@ -333,7 +393,8 @@ ex) 세미콜론 제거 / 타입 추론(코드를 더 명확하게 만들고 실
   다만, 이러한 복사 작업은 상당한 시간이 걸리므로 실제 원본이나 복사본이 수정되기 전까지는 복사를 하지 않고 원본 리소스를 공유하다가
   원본이나 복사본에서 수정이 일어날 경우, 그때 복사하는 작업을 하는 기술이다. 
   
-  - Swift에선 Collection Type(Array, Dictionary, Set)을 복사해서 사용
+  - Swift에선 Collection Type(Array, Dictionary, Set)에만 COW가 적용된다.
+  - 사용자 정의 값타입에서는 COW를 지원하지 않지만, 사용자가 직접 COW를 구현할 수 있다.
   ```
   
 </details>
@@ -440,6 +501,51 @@ ex) 세미콜론 제거 / 타입 추론(코드를 더 명확하게 만들고 실
   
 </details>
 
+<details> 
+  <summary> Generic 이란? </summary>
+
+  ```
+  Generic : 타입에 의존하지 않는 범용 코드를 작성할 때 사용되는 것
+
+  // 아래와 같이 타입에 제한을 두지 않는 코드를 작성할 수 있다.
+  func addTwoValues<T> (_ a: T, _ b:T) -> T {
+    return a + b
+  }
+
+  여기서 T(Type parameter)는 해당 함수가 실제로 호출될 때 해당 매개변수의 타입으로 대체되는 placeHolder이다.
+
+  제네릭은 위처험 함수 뿐만 아니라 구조체, 클래스, 열거형 타입에도 선언할 수 있다.
+
+  // 구조체
+  struct Stack<T> {
+      let items: [T] = []
+      mutating func push(_ item: T) { ... }
+      mutating func pop() -> T { ... }
+  }
+  ```
+</details>
+
+<details> 
+  <summary> PropertyWrapper 란? </summary>
+
+  ```
+  연산 프로퍼티의 중복되는 로직을 구현하고 해당 로직을 필요로 하는 프로퍼티들 자체에 연결하여 사용할 수 있게 하여 코드의 재사용성을 높일 수 있게 한다.
+
+  struct, class, enum을 만들고 @propertyWrapper 를 맨 앞에 명시하여 정의
+
+  // 정의
+  @propertyWrapper
+  struct UserDefault<T> {
+  }
+
+  // 사용하기
+  @UserDefault(key: "isLoggedIn", defaultValue: false)
+  static var isLoggedIn: Bool
+
+  ```
+</details>
+
+
 ## ARC
 
 <details> 
@@ -487,6 +593,7 @@ ex) 세미콜론 제거 / 타입 추론(코드를 더 명확하게 만들고 실
   
   ```
   순환 참조 : 두 개의 객체가 서로가 서로를 참조하고 있는 형태
+  => 서로 참조하고 있기 때문에 절대 메모리가 해제되지 않음
   - 메모리 누수 발생 
   ```
   
@@ -496,10 +603,37 @@ ex) 세미콜론 제거 / 타입 추론(코드를 더 명확하게 만들고 실
   <summary> 강한 순환 참조 (Strong Reference Cycle) 는 어떤 경우에 발생하는지 설명하시오. </summary>
   
   ```
-  - 클래스 인스턴스 간의 강한 순환 참조
-  - 클로저에서의 강한 순환 참조
+  1. 클래스 인스턴스 간의 강한 순환 참조
+
+  2. Escaping 클로저에서의 강한 순환 참조
+  non-escaping closure에서는 클로저 내에서 작업을 마치고 메모리가 해지되기 때문에 강한 참조를 해도 상관없지만,
+  escaping closure에서는 함수가 종료되어도 참조 카운트가 남아 있어 메모리 누수가 발생할 수 있다.
+
+  따라서, 인스턴스 참조로 인한 강한 순환참조를 업애기 위해 [weak self] 를 사용한다.
+  특히, rxSwift의 operator들과 subscriber들은 모두 escaping closure로 되어있기 때문에 [weak self] 를 사용해야한다.
   ```
   
+</details>
+
+<details> 
+  <summary> weak vs unowned </summary>
+
+  ```
+  1. Weak : 약한 참조
+  - 참조하는 인스턴스의 참조 횟수를 증가시키지 않음
+  - 메모리 해제 시 nil 할당 -> 옵셔널 타입이어야한다.
+
+  2. Unowned :  미소유 참조
+  - 참조하는 인스턴스의 참조 횟수를 증가시키지 않음
+  - 메모리에서 해제돼도 nil 할당하지 않음 -> 상수 타입
+
+  unowned 객체가 사라지게 되면 댕글링 포인터가 남게 되고, 이 댕글링 포인터를 참조하게 되면 crash 발생
+  따라서 unowned는 사라지지 않을 것이라고 보장되는 객체에만 설정해야한다.
+
+  * 댕글링 포인터 : 기존에 바라보고 있던 객체가 해제되면서 할당되지 않는 공간을 바라보는 포인터
+
+  ```
+
 </details>
 
 ## 객체지향 프로그래밍(OOP)
